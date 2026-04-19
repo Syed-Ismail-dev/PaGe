@@ -1,0 +1,43 @@
+{% extends "layout.html"%} {% block title%} Login {% endblock %} {% block body%}
+<main class="login">
+  <div class="form">
+    <div class="form-1">
+      <p>Login Form</p>
+      <form action="/login" method="post" class="form2">
+        <input
+          autofocus
+          autocomplete="off"
+          id="input1"
+          placeholder="Userame"
+          name="username"
+          type="text"
+        />
+        <div class="password-box3">
+          <input
+            autocomplete="off"
+            id="input"
+            placeholder="Password"
+            name="password"
+            type="password"
+          />
+          <button
+            type="button"
+            id="toggle3"
+            onclick="toggles('input', 'toggle3')"
+          >
+            👁️
+          </button>
+        </div>
+        {% if error %}
+        <span id="error">*{{ error }}</span>
+        {% endif %}
+        <button id="button" type="submit">Login</button>
+      </form>
+      <p id="Rregister">
+        New user: <a class="navbar" href="./register">Register</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

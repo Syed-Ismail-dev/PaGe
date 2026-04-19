@@ -1,0 +1,134 @@
+{% extends "layout.html"%} {% block title%}Home{% endblock %} {% block body%}
+<header>
+  <nav>
+    <li><a id="page" href="/">PaGe</a></li>
+    <ul>
+      <li><a class="navbar" href="./logout">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+<main class="home-main">
+  <section class="section-1">
+    <h1>Password Generator</h1>
+    <h4>
+      Create your password by entering an application name and account
+      name(username).
+    </h4>
+
+    <form action="/save" method="post" id="home-form">
+      <input
+        autofocus
+        autocomplete="off"
+        class="home-input"
+        name="name"
+        placeholder="Application name, Account name"
+        type="text"
+      />
+      <div class="password-box">
+        <input
+          name="password"
+          class="home-input"
+          id="password"
+          placeholder="Password"
+          type="password"
+        />
+        <button
+          type="button"
+          id="toggle"
+          onclick="toggles('password', 'toggle')"
+        >
+          👁️
+        </button>
+      </div>
+
+      <div class="label">
+        <label class="lable-1"
+          >Lenght:<span id="lengthValue">8</span>
+          <input
+            name="length "
+            id="length"
+            value="8"
+            min="8"
+            max="50"
+            type="range"
+        /></label>
+        <label class="lable-2"
+          >Character: <input name="character" id="char" type="checkbox"
+        /></label>
+        <label class="lable-2"
+          >Special character:
+          <input name="character" id="special" type="checkbox"
+        /></label>
+      </div>
+      <div class="btn">
+        <button class="home-btn" id="generate" type="text">Generate</button>
+
+        <button class="home-btn" type="submit">Save</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="section-2">
+    <h1>Your saved passwords</h1>
+    {% for data in datas%}
+    <div class="store">
+      <div class="hiddenform" id="show-form" style="display: none" class="box">
+        <button class="close-btn" onclick="hideForm()">×</button>
+        <form id="password-form" method="post">
+          <p>*PaGe account password required</p>
+          <div class="password-box2">
+            <input
+              autofocus
+              autocomplete="off"
+              name="checkpassword"
+              id="password2"
+              placeholder="Password"
+              type="password"
+            />
+            <button
+              type="button"
+              id="toggle2"
+              onclick="toggles('password2', 'toggle2')"
+            >
+              👁️
+            </button>
+          </div>
+          <button type="submit" id="verify">Verify</button>
+        </form>
+      </div>
+      <p>{{ data.accountname }}</p>
+      <p>######################</p>
+
+      <div class="store-btn">
+        <button
+          class="S-btn1"
+          data-id="{{ data.id }}"
+          id="{{ data.id }}"
+          onclick="showSecrect({{ data.id }})"
+        >
+          {% if data.id == selected_id %} Hide {% else %} Show {% endif %}
+        </button>
+
+        <button
+          class="S-btn2"
+          onclick="deleteSecrect({{ data.id }})"
+          type="submit"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+    {% if data.id == selected_id %}
+    <div id="details-{{ data.id }}" class="show">
+      <p id="name_secrect">Name: {{ data.accountname }}</p>
+      <p id="password_secrect">Password: {{ data.accountpassword }}</p>
+    </div>
+    {% else %}
+    <div id="details-{{ data.id }}" class="hide">
+      <p id="name_secrect"></p>
+      <p id="password_secrect"></p>
+    </div>
+    {% endif %} {% endfor%}
+  </section>
+</main>
+{% endblock %}

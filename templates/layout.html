@@ -1,0 +1,27 @@
+<<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PaGE :{% block title%} {% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    {% block body %} {% endblock %}
+    <footer
+      style="
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        color: #555;
+        width: 70%;
+        margin: auto;
+        background: white;
+      "
+    >
+      © 2026 Password Generator | Built for secure and simple password
+      management | Built by Syed Mohammed Ismail
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </body>
+</html>
